@@ -27,3 +27,7 @@ INSERT INTO AddressBook Values
 ('Prateeksha','Pai','Sirsi','Sirsi', 'Karnataka','581336','8945231256','prateeksha@gmail.com'),
 ('Vasanth','Pai','Sirsi','Sirsi', 'Karnataka','581336','9482615957','vasanthpai@gmail.com'),
 ('Geetha','Pai','Sirsi','Sirsi', 'Karnataka','581336','6284519537','geethapai@gmail.com');
+
+--Edit the existing data in the table
+UPDATE AddressBook
+set Address = 'Dharwad', City = 'Dharwad' where FirstName = 'Prateeksha' ;
