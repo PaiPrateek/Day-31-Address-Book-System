@@ -31,3 +31,6 @@ INSERT INTO AddressBook Values
 --Edit the existing data in the table
 UPDATE AddressBook
 set Address = 'Dharwad', City = 'Dharwad' where FirstName = 'Prateeksha' ;
+
+--Delete person using persons name
+DELETE AddressBook WHERE FirstName = 'Geetha'
