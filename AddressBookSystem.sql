@@ -20,3 +20,10 @@ Email Varchar(20)
 
 --To View the AddressBook Table
 SELECT * FROM AddressBook
+
+--Insert COntacts into AddressBook
+INSERT INTO AddressBook Values 
+('Prateek','Pai','Bangalore','Bangalore', 'Karnataka','560027','99445007207','prateekpai@gmail.com'),
+('Prateeksha','Pai','Sirsi','Sirsi', 'Karnataka','581336','8945231256','prateeksha@gmail.com'),
+('Vasanth','Pai','Sirsi','Sirsi', 'Karnataka','581336','9482615957','vasanthpai@gmail.com'),
+('Geetha','Pai','Sirsi','Sirsi', 'Karnataka','581336','6284519537','geethapai@gmail.com');
