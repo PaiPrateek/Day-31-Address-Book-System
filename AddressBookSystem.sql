@@ -34,3 +34,6 @@ set Address = 'Dharwad', City = 'Dharwad' where FirstName = 'Prateeksha' ;
 
 --Delete person using persons name
 DELETE AddressBook WHERE FirstName = 'Geetha'
+
+--Retrieve the persons city / State by using persons name
+Select City, State from AddressBook where FirstName = 'Prateek'
