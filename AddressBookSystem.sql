@@ -63,3 +63,28 @@ update AddressBook SET AddressBookName = 'Akshay', AddressBookType = 'Profession
 
 --Get number of contact persons i.e count by type
 SELECT AddressBookType,  COUNT(AddressBookType) from AddressBook group by AddressBookType
+
+--Adding AddressBookID for AddressBook Table to Assign AddressBooktype
+AlTER table AddressBook drop column AddressBookID
+
+--Adding COnstraints to AddressBook Table
+Alter table AddressBook add AddressBookID int foreign key references AddressBookCategory
+
+--Creating the AddressBookCategory table to differentiate Family, Friend and Profession
+CREATE TABLE AddressBookCategory(
+AddressBookID int primary key, 
+AddressBookType varchar(20)
+)
+
+SELECt * FROM AddressBookCategory
+SELECT * FROM AddressBook
+--Assigning Id to Family, Friend and Profession
+Insert into AddressBookCategory values (1,'Family'),(2,'Friend'),(3,'Profession')
+
+--Add person to both Friend and Family
+update AddressBook SET AddressBookID =1  where FirstName = 'Prateek'
+update AddressBook SET AddressBookID =2  where FirstName = 'Prateeksha'
+update AddressBook SET AddressBookID =1  where FirstName = 'Vasanth'
+update AddressBook SET AddressBookID = 1 where FirstName = 'Geetha'
+update AddressBook SET AddressBookID = 2 where FirstName = 'Ramanath'
+update AddressBook SET AddressBookID = 3 where FirstName = 'Akshay'
