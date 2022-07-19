@@ -49,3 +49,14 @@ INSERT INTO AddressBook Values
 
 --Sort Persons Name Alphabetically for a given city
 SELECT * FROM AddressBook WHERE City = 'Sirsi' ORDER by FirstName ASC
+
+--Identify the address book by Name and Type
+ALTER TABLE AddressBook ADD AddressBookName varchar (20),AddressBookType varchar (20);
+
+--Update AddressBook Contact
+update AddressBook SET AddressBookName = 'Self', AddressBookType = 'Family' where FirstName = 'Prateek'
+update AddressBook SET AddressBookName = 'Prateeksha', AddressBookType = 'Friend' where FirstName = 'Prateeksha'
+update AddressBook SET AddressBookName = 'Vasanth', AddressBookType = 'Family' where FirstName = 'Vasanth'
+update AddressBook SET AddressBookName = 'Geetha', AddressBookType = 'Family' where FirstName = 'Geetha'
+update AddressBook SET AddressBookName = 'Ramu', AddressBookType = 'Friend' where FirstName = 'Ramanath'
+update AddressBook SET AddressBookName = 'Akshay', AddressBookType = 'Profession' where FirstName = 'Akshay'
