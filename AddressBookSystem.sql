@@ -88,3 +88,5 @@ update AddressBook SET AddressBookID =1  where FirstName = 'Vasanth'
 update AddressBook SET AddressBookID = 1 where FirstName = 'Geetha'
 update AddressBook SET AddressBookID = 2 where FirstName = 'Ramanath'
 update AddressBook SET AddressBookID = 3 where FirstName = 'Akshay'
+
+--E-R Diagram
