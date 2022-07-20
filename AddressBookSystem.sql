@@ -90,3 +90,17 @@ update AddressBook SET AddressBookID = 2 where FirstName = 'Ramanath'
 update AddressBook SET AddressBookID = 3 where FirstName = 'Akshay'
 
 --E-R Diagram
+
+--Retrieve the persons city / State by using persons name
+Select City, State from AddressBook where FirstName = 'Prateek' 
+
+--Size of Addressbook by City / State
+select COUNT(City) FROM AddressBook
+select COUNT(State) FROM AddressBook
+
+--Sort Persons Name Alphabetically for a given city
+SELECT * FROM AddressBook WHERE City = 'Sirsi' ORDER by FirstName ASC
+
+--Get number of contact persons i.e count by type
+select AddressBookID, COUNT (AddressBookID) from AddressBook group by AddressBookID 
+
