@@ -17,7 +17,10 @@ namespace AddressBookSystem
             InsertContactInAddressBookTable();
 
             //Update existing Contacts in  AddressBook Table
-            UpdateExistingContactInAddressBookTable(); 
+            UpdateExistingContactInAddressBookTable();
+
+            //Delete existing Contacts in  AddressBook Table by using persons name
+            DeleteContactInAddressBookTable(); 
         }
         //Create New Database
         public static void CreateAddressBookServiceDB()
@@ -88,6 +91,20 @@ namespace AddressBookSystem
             int reader = cmd.ExecuteNonQuery();
             Console.WriteLine(reader);
             Console.WriteLine("Contact is Updated Successfully ");
+            Console.ReadKey();
+        }
+
+        //Delete existing Contacts in  AddressBook Table by using persons name
+        public static void DeleteContactInAddressBookTable() 
+        {
+            var SQL = @$"DELETE AddressBook WHERE FirstName = 'Geetha'";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("Contact is deleted Successfully ");
             Console.ReadKey();
         }
     }
