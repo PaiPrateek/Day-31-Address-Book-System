@@ -35,10 +35,13 @@ namespace AddressBookSystem
             RetrieveEntriesSortedAlphabeticallyByPersonsName();
 
             //Identify the address book by Name and Type
-            IdentifyAddressBookByNameandType(); //UC9
+            IdentifyAddressBookByNameandType();
 
             //Identify the address book by Name and Type
-            UpdateAddressBookByNameandType(); //UC9-extended
+            UpdateAddressBookByNameandType();
+
+            //Get number of contact persons i.e count by type
+            GetNumberOfPersonsCountbyType(); 
         }
         //Create New Database
         public static void CreateAddressBookServiceDB()
@@ -222,6 +225,28 @@ namespace AddressBookSystem
             int reader = cmd.ExecuteNonQuery();
             Console.WriteLine(reader);
             Console.WriteLine("AddressBook Table is Updated Successfully ");
+            Console.ReadKey();
+        }
+
+        //Get number of contact persons i.e count by type
+        public static void GetNumberOfPersonsCountbyType() 
+        {
+            var SQL = @$"SELECT AddressBookType,  COUNT(AddressBookType) from AddressBook group by AddressBookType";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Console.WriteLine("AddressBook Type {0}  - Numbers {1} ", reader["AddressBookType"],reader);
+                }
+                reader.Close();
+            };
+            Console.WriteLine("\nRetrieve data Successfully");
             Console.ReadKey();
         }
     }
