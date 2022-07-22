@@ -11,7 +11,10 @@ namespace AddressBookSystem
             CreateAddressBookServiceDB();
 
             //Create AddressBook Table
-            CreateAddressBookTable(); //UC2
+            CreateAddressBookTable();
+
+            //Insert New Contacts in  AddressBook Table
+            InsertContactInAddressBookTable(); 
         }
         //Create New Database
         public static void CreateAddressBookServiceDB()
@@ -52,5 +55,23 @@ namespace AddressBookSystem
             Console.WriteLine("AddressBook Table Created Successfully");
             Console.ReadKey();
         }
+
+        //Insert New Contacts in  AddressBook Table
+        public static void InsertContactInAddressBookTable() //UC3
+        {
+            var SQL = @$"INSERT INTO AddressBook Values  ('Prateek','Pai','Bangalore','Bangalore', 'Karnataka','560027','99445007207','prateekpai@gmail.com'),
+                                                         ('Prateeksha','Pai','Sirsi','Sirsi', 'Karnataka','581336','8945231256','prateeksha@gmail.com'),
+                                                         ('Vasanth','Pai','Sirsi','Sirsi', 'Karnataka','581336','9482615957','vasanthpai@gmail.com'),
+                                                         ('Geetha','Pai','Sirsi','Sirsi', 'Karnataka','581336','6284519537','geethapai@gmail.com');";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("New contact is Successfully inserted");
+            Console.ReadKey();
+        }
+
     }
 }
