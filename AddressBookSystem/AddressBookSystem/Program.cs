@@ -7,32 +7,38 @@ namespace AddressBookSystem
     {
         static void Main(string[] args)
         {
-            ////Create AddreessBook_System Database
-            //CreateAddressBookServiceDB();
+            //Create AddreessBook_System Database
+            CreateAddressBookServiceDB();
 
-            ////Create AddressBook Table
-            //CreateAddressBookTable();
+            //Create AddressBook Table
+            CreateAddressBookTable();
 
-            ////Insert New Contacts in  AddressBook Table
-            //InsertContactInAddressBookTable();
+            //Insert New Contacts in  AddressBook Table
+            InsertContactInAddressBookTable();
 
-            ////Update existing Contacts in  AddressBook Table
-            //UpdateExistingContactInAddressBookTable();
+            //Update existing Contacts in  AddressBook Table
+            UpdateExistingContactInAddressBookTable();
 
-            ////Delete existing Contacts in  AddressBook Table by using persons name
-            //DeleteContactInAddressBookTable();
+            //Delete existing Contacts in  AddressBook Table by using persons name
+            DeleteContactInAddressBookTable();
 
-            ////Retrieve the persons city / State by using persons name
-            //RetrievePersonBelongsToCityByPersonsName();
+            //Retrieve the persons city / State by using persons name
+            RetrievePersonBelongsToCityByPersonsName();
 
-            ////Size of Addressbook by City 
-            //SizeOfAddressBookByCity();
+            //Size of Addressbook by City 
+            SizeOfAddressBookByCity();
 
-            ////Size of Addressbook by State
-            //SizeOfAddressBookByState();
+            //Size of Addressbook by State
+            SizeOfAddressBookByState();
 
             //Sort Persons Name Alphabetically for a given city
-            RetrieveEntriesSortedAlphabeticallyByPersonsName(); 
+            RetrieveEntriesSortedAlphabeticallyByPersonsName();
+
+            //Identify the address book by Name and Type
+            IdentifyAddressBookByNameandType(); //UC9
+
+            //Identify the address book by Name and Type
+            UpdateAddressBookByNameandType(); //UC9-extended
         }
         //Create New Database
         public static void CreateAddressBookServiceDB()
@@ -183,6 +189,39 @@ namespace AddressBookSystem
                 }
                 reader.Close();
             };
+            Console.ReadKey();
+        }
+
+        //Identify the address book by Name and Type
+        public static void IdentifyAddressBookByNameandType() 
+        {
+            var SQL = @$"ALTER TABLE AddressBook ADD AddressBookName varchar (20),AddressBookType varchar (20)";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("AddressBook Table is Updated Successfully ");
+            Console.ReadKey();
+        }
+
+        //Identify the address book by Name and Type
+        public static void UpdateAddressBookByNameandType()
+        {
+            var SQL = @$"update AddressBook SET AddressBookName = 'Self', AddressBookType = 'Family' where FirstName = 'Prateek'
+                        update AddressBook SET AddressBookName = 'Prateeksha', AddressBookType = 'Friend' where FirstName = 'Prateeksha'
+                        update AddressBook SET AddressBookName = 'Vasanth', AddressBookType = 'Family' where FirstName = 'Vasanth'
+                        update AddressBook SET AddressBookName = 'Geetha', AddressBookType = 'Family' where FirstName = 'Geetha'
+                        update AddressBook SET AddressBookName = 'Ramu', AddressBookType = 'Friend' where FirstName = 'Ramanath'
+                        update AddressBook SET AddressBookName = 'Akshay', AddressBookType = 'Profession' where FirstName = 'Akshay'";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("AddressBook Table is Updated Successfully ");
             Console.ReadKey();
         }
     }
