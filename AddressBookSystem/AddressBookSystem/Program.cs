@@ -51,19 +51,36 @@ namespace AddressBookSystem
             DropColumnInAddressBook(); //UC12
 
             //Creating the AddressBookCategory table to differentiate Family, Friend and Profession
-            CreatingAddressBookCategoryTable(); //UC12 - extension
+            CreatingAddressBookCategoryTable(); 
 
             //Adding Constraints to AddressBook Table
-            AddConstraintsToAddressBookTable(); //UC12 - extension
+            AddConstraintsToAddressBookTable(); 
 
             //Update the AddressBookCategory table 
-            UpdateAddressBookCategoryTable(); //UC12 - extension
+            UpdateAddressBookCategoryTable(); 
 
             //Extending the AddressBook table by adding AddressBook ID field
-            ExtendingTheAddressBookByAddingAddressBookID(); //UC12 - extension
+            ExtendingTheAddressBookByAddingAddressBookID(); 
 
             //Update AddressBook ID in AddressBook table 
-            UpdateAddressBookIDInAddingAddress(); //UC12 - extension
+            UpdateAddressBookIDInAddingAddress();
+
+            //------------------ Ensure All retrieval queries working with new table structure -------------------
+
+            //Retrieve the persons city / State by using persons name
+            RetrievePersonBelongsToCityByPersonsName();
+
+            //Size of Addressbook by City 
+            SizeOfAddressBookByCity();
+
+            //Size of Addressbook by State
+            SizeOfAddressBookByState();
+
+            //Sort Persons Name Alphabetically for a given city
+            RetrieveEntriesSortedAlphabeticallyByPersonsName();
+
+            //Get number of contact persons i.e count by type
+            GetNumberOfPersonsCountbyType();
         }
         //Create New Database
         public static void CreateAddressBookServiceDB()
