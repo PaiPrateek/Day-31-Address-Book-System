@@ -44,7 +44,26 @@ namespace AddressBookSystem
             GetNumberOfPersonsCountbyType();
 
             //Add person to both Friend and Family
-            AddPersonToBothFriendAndFamily(); 
+            AddPersonToBothFriendAndFamily();
+
+            //------------------Operations Drawing ER Diagram-------------------
+            //Drop  AddressBookName and AddressBookType from Table
+            DropColumnInAddressBook(); //UC12
+
+            //Creating the AddressBookCategory table to differentiate Family, Friend and Profession
+            CreatingAddressBookCategoryTable(); //UC12 - extension
+
+            //Adding Constraints to AddressBook Table
+            AddConstraintsToAddressBookTable(); //UC12 - extension
+
+            //Update the AddressBookCategory table 
+            UpdateAddressBookCategoryTable(); //UC12 - extension
+
+            //Extending the AddressBook table by adding AddressBook ID field
+            ExtendingTheAddressBookByAddingAddressBookID(); //UC12 - extension
+
+            //Update AddressBook ID in AddressBook table 
+            UpdateAddressBookIDInAddingAddress(); //UC12 - extension
         }
         //Create New Database
         public static void CreateAddressBookServiceDB()
@@ -266,6 +285,97 @@ namespace AddressBookSystem
             int reader = cmd.ExecuteNonQuery();
             Console.WriteLine(reader);
             Console.WriteLine("Contact Person is Added Successfully ");
+            Console.ReadKey();
+        }
+
+        //------------------Operations Drawing ER Diagram-------------------
+        //Drop  AddressBookName and AddressBookType from Table
+        public static void DropColumnInAddressBook() //UC12
+        {
+            var SQL = @$"AlTER table AddressBook drop column AddressBookName, AddressBookType";
+
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("Task done Successfully ");
+            Console.ReadKey();
+        }
+
+        //Creating the AddressBookCategory table to differentiate Family, Friend and Profession
+        public static void CreatingAddressBookCategoryTable() //UC12 - extension
+        {
+            var SQL = @$"CREATE TABLE AddressBookCategory( AddressBookID int primary key, AddressBookType varchar(20) )";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("AddressBookCategory Table Created Successfully ");
+            Console.ReadKey();
+        }
+        //Adding Constraints to AddressBook Table
+        public static void AddConstraintsToAddressBookTable() //UC12 - extension
+        {
+            var SQL = @$"Alter table AddressBook add AddressBookID int foreign key references AddressBookCategory";
+
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("Task done Successfully ");
+            Console.ReadKey();
+        }
+
+        //Update the AddressBookCategory table 
+        public static void UpdateAddressBookCategoryTable() //UC12 - extension
+        {
+            var SQL = @$"Insert into AddressBookCategory values (1,'Family'),(2,'Friend'),(3,'Profession')";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("AddressBookCategory Table Created Successfully ");
+            Console.ReadKey();
+        }
+
+        //Extending the AddressBook table by adding AddressBook ID field
+        public static void ExtendingTheAddressBookByAddingAddressBookID() //UC12 - extension
+        {
+            var SQL = @$"ALTER TABLE AddressBook add AddressBookID int foreign key references AddressBookCategory";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("AddressBookID field added into teh Table");
+            Console.ReadKey();
+        }
+
+        //Update AddressBook ID in AddressBook table 
+        public static void UpdateAddressBookIDInAddingAddress() //UC12 - extension
+        {
+            var SQL = @$"update AddressBook SET AddressBookID =1  where FirstName = 'Prateek'
+                        update AddressBook SET AddressBookID =2  where FirstName = 'Prateeksha'
+                        update AddressBook SET AddressBookID =1  where FirstName = 'Vasanth'
+                        update AddressBook SET AddressBookID = 1 where FirstName = 'Geetha'
+                        update AddressBook SET AddressBookID = 2 where FirstName = 'Ramanath'
+                        update AddressBook SET AddressBookID = 3 where FirstName = 'Akshay'";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("AddressBookID Updated in AddressBook Successfully");
             Console.ReadKey();
         }
     }
