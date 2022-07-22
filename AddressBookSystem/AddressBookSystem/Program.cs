@@ -41,7 +41,10 @@ namespace AddressBookSystem
             UpdateAddressBookByNameandType();
 
             //Get number of contact persons i.e count by type
-            GetNumberOfPersonsCountbyType(); 
+            GetNumberOfPersonsCountbyType();
+
+            //Add person to both Friend and Family
+            AddPersonToBothFriendAndFamily(); 
         }
         //Create New Database
         public static void CreateAddressBookServiceDB()
@@ -247,6 +250,22 @@ namespace AddressBookSystem
                 reader.Close();
             };
             Console.WriteLine("\nRetrieve data Successfully");
+            Console.ReadKey();
+        }
+
+        //Add person to both Friend and Family
+        public static void AddPersonToBothFriendAndFamily()
+        {
+            var SQL = @$"INSERT INTO AddressBook Values('Ramanath','Pai','Kumta','Bangalore', 'Karnataka','583027','6645229837','ramu@gmail.com','Family','Ramu'),
+                                                         ('Ramanath','Pai','Kumta','Bangalore', 'Karnataka','583027','6645229837','ramu@gmail.com','Friend','Ramu')";
+
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("Contact Person is Added Successfully ");
             Console.ReadKey();
         }
     }
