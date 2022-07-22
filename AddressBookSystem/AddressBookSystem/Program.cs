@@ -20,7 +20,10 @@ namespace AddressBookSystem
             UpdateExistingContactInAddressBookTable();
 
             //Delete existing Contacts in  AddressBook Table by using persons name
-            DeleteContactInAddressBookTable(); 
+            DeleteContactInAddressBookTable();
+
+            //Retrieve the persons city / State by using persons name
+            RetrievePersonBelongsToCityByPersonsName(); 
         }
         //Create New Database
         public static void CreateAddressBookServiceDB()
@@ -105,6 +108,27 @@ namespace AddressBookSystem
             int reader = cmd.ExecuteNonQuery();
             Console.WriteLine(reader);
             Console.WriteLine("Contact is deleted Successfully ");
+            Console.ReadKey();
+        }
+
+        //Retrieve the persons city / State by using persons name
+        public static void RetrievePersonBelongsToCityByPersonsName() 
+        {
+            var SQL = @$"Select City, State from AddressBook where FirstName = 'Prateek'";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Console.WriteLine("Person Belongs to {0} - City {1} - State", reader["City"], reader["State"]);
+                }
+                reader.Close();
+            };
             Console.ReadKey();
         }
     }
