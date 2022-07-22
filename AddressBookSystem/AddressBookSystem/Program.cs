@@ -7,29 +7,32 @@ namespace AddressBookSystem
     {
         static void Main(string[] args)
         {
-            //Create AddreessBook_System Database
-            CreateAddressBookServiceDB();
+            ////Create AddreessBook_System Database
+            //CreateAddressBookServiceDB();
 
-            //Create AddressBook Table
-            CreateAddressBookTable();
+            ////Create AddressBook Table
+            //CreateAddressBookTable();
 
-            //Insert New Contacts in  AddressBook Table
-            InsertContactInAddressBookTable();
+            ////Insert New Contacts in  AddressBook Table
+            //InsertContactInAddressBookTable();
 
-            //Update existing Contacts in  AddressBook Table
-            UpdateExistingContactInAddressBookTable();
+            ////Update existing Contacts in  AddressBook Table
+            //UpdateExistingContactInAddressBookTable();
 
-            //Delete existing Contacts in  AddressBook Table by using persons name
-            DeleteContactInAddressBookTable();
+            ////Delete existing Contacts in  AddressBook Table by using persons name
+            //DeleteContactInAddressBookTable();
 
-            //Retrieve the persons city / State by using persons name
-            RetrievePersonBelongsToCityByPersonsName();
+            ////Retrieve the persons city / State by using persons name
+            //RetrievePersonBelongsToCityByPersonsName();
 
-            //Size of Addressbook by City 
-            SizeOfAddressBookByCity(); 
+            ////Size of Addressbook by City 
+            //SizeOfAddressBookByCity();
 
-            //Size of Addressbook by State
-            SizeOfAddressBookByState(); 
+            ////Size of Addressbook by State
+            //SizeOfAddressBookByState();
+
+            //Sort Persons Name Alphabetically for a given city
+            RetrieveEntriesSortedAlphabeticallyByPersonsName(); 
         }
         //Create New Database
         public static void CreateAddressBookServiceDB()
@@ -160,6 +163,26 @@ namespace AddressBookSystem
             connection.Open();
             int reader = cmd.ExecuteNonQuery();
             Console.WriteLine("Size of the AddressBook is " + reader);
+            Console.ReadKey();
+        }
+        //Sort Persons Name Alphabetically for a given city
+        public static void RetrieveEntriesSortedAlphabeticallyByPersonsName() 
+        {
+            var SQL = @$"SELECT * FROM AddressBook WHERE City = 'Sirsi' ORDER by FirstName ASC";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    Console.WriteLine("Person Belongs to {0} - City {1} - State", reader["City"], reader["State"]);
+                }
+                reader.Close();
+            };
             Console.ReadKey();
         }
     }
