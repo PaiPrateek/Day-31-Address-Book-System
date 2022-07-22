@@ -14,7 +14,10 @@ namespace AddressBookSystem
             CreateAddressBookTable();
 
             //Insert New Contacts in  AddressBook Table
-            InsertContactInAddressBookTable(); 
+            InsertContactInAddressBookTable();
+
+            //Update existing Contacts in  AddressBook Table
+            UpdateExistingContactInAddressBookTable(); 
         }
         //Create New Database
         public static void CreateAddressBookServiceDB()
@@ -57,7 +60,7 @@ namespace AddressBookSystem
         }
 
         //Insert New Contacts in  AddressBook Table
-        public static void InsertContactInAddressBookTable() //UC3
+        public static void InsertContactInAddressBookTable() 
         {
             var SQL = @$"INSERT INTO AddressBook Values  ('Prateek','Pai','Bangalore','Bangalore', 'Karnataka','560027','99445007207','prateekpai@gmail.com'),
                                                          ('Prateeksha','Pai','Sirsi','Sirsi', 'Karnataka','581336','8945231256','prateeksha@gmail.com'),
@@ -73,5 +76,19 @@ namespace AddressBookSystem
             Console.ReadKey();
         }
 
+
+        //Update existing Contacts in  AddressBook Table
+        public static void UpdateExistingContactInAddressBookTable() 
+        {
+            var SQL = @$"UPDATE AddressBook set Address = 'Dharwad', City = 'Dharwad' where FirstName = 'Prateeksha'";
+            string connectingString = @"Data Source=DESKTOP-2UKFQA8;Initial Catalog=AddreessBook_System;Integrated Security=True";
+            SqlConnection connection = new SqlConnection(connectingString);
+            SqlCommand cmd = new SqlCommand(SQL, connection);
+            connection.Open();
+            int reader = cmd.ExecuteNonQuery();
+            Console.WriteLine(reader);
+            Console.WriteLine("Contact is Updated Successfully ");
+            Console.ReadKey();
+        }
     }
 }
